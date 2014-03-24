@@ -1,0 +1,53 @@
+﻿<Window x:Class="ASPASC.UI.Settings.Database_Add"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add New Database" Height="400" Width="375" WindowStartupLocation="CenterScreen"
+        Icon="/ASPASC.UI;component/Images/ASPASC.png">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Database Server Name:" Width="135" />
+                <TextBox Width="200" Name="tbDBServer" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Database Name:" Width="135" />
+                <TextBox Width="200" Name="tbDatabaseName" Text="aspnetdb" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <CheckBox Content="Use Windows Authentication" Margin="135,0,0,0" Name="cbWindowsAuth" 
+                          Checked="cbWindowsAuth_Checked" Unchecked="cbWindowsAuth_Checked"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="User Name:" Width="135" />
+                <TextBox Width="200" Name="tbUserName"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Password:" Width="135" />
+                <PasswordBox Width="200" Name="tbPassword" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Features:" Width="135" />
+                <StackPanel>
+                    <CheckBox Name="cbAll" Content="All" IsChecked="True" Checked="cbAll_Checked" Unchecked="cbAll_Checked" />
+                    <CheckBox Name="cbMembership" Content="Membership" IsEnabled="False" />
+                    <CheckBox Name="cbRole" Content="Role Manager" IsEnabled="False" />
+                    <CheckBox Name="cbProfile" Content="Profiles" IsEnabled="False" />
+                    <CheckBox Name="cbPersonal" Content="Personalization" IsEnabled="False" />
+                    <CheckBox Name="cbWebEvent" Content="SQL Web Event Provider" IsEnabled="False" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Application Name:" Width="135" />
+                <TextBox Width="200" Name="tbApplicationName" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,15,5,5" HorizontalAlignment="Center">
+                <Button Name="btnSave" Width="100" Height="30" Click="btnSave_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/ASPASC.UI;component/Images/dbadd.png" Height="20" />
+                        <Label Content="Create" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
