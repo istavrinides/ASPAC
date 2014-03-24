@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="aspnetdb" Class="ASPASCDCDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=aspnetdb;Integrated Security=True" SettingsObjectName="ASPASC.DataLayer.Properties.Settings" SettingsPropertyName="aspnetdbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.vw_aspnet_Applications" Member="vw_aspnet_Applications">
+    <Type Name="vw_aspnet_Application">
+      <Column Name="ApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.aspnet_Applications_CreateApplication" Method="aspnet_Applications_CreateApplication">
+    <Parameter Name="ApplicationName" Parameter="applicationName" Type="System.String" DbType="NVarChar(256)" />
+    <Parameter Name="ApplicationId" Parameter="applicationId" Type="System.Guid" DbType="UniqueIdentifier" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

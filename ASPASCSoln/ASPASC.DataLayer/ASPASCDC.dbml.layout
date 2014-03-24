@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ASPASCDC">
+  <DataContextMoniker Name="/ASPASCDCDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1bd5804c-0fbf-416e-bc0a-b51bbcceac87" absoluteBounds="0.5, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ASPASCDCDataContext/vw_aspnet_Application" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9d071f9d-51a6-4615-be0b-28dd0a98169e" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

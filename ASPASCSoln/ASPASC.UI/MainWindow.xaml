@@ -1,0 +1,131 @@
+﻿<Window x:Class="ASPASC.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ASP.Net Application Services Configuration Tool" Height="680" Width="780" 
+        WindowStartupLocation="CenterScreen" Icon="Images/ASPASC.png" Loaded="Window_Loaded">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <Menu Name="mainMenu">
+                <MenuItem Header="_File">
+                    <MenuItem Name="miFile" Header="_Settings" Click="miFile_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/settings.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="miConnect" Header="_Connect" Click="miConnect_Click" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <Image Source="Images/connect.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="miEdit" Header="Edit Selected Database Features" Click="miEdit_Click" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <Image Source="Images/dbedit.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="miCreate" Header="Create new database" Click="miCreate_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/dbadd.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Name="miAbout" Header="_About" Click="miAbout_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/about.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
+            <Separator/>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <Label Content="Current Configuration:" FontWeight="Bold" />
+                    <Label Content="DB Server:"/>
+                    <Label Name="lblDBServer" Margin="-5,0,0,5"/>
+                    <Label Content="DB Name:"/>
+                    <Label Name="lblDBName" Margin="-5,0,0,5"/>
+                    <Label Content="User Name:" Name="lblUserNameLabel"/>
+                    <Label Name="lblUserName" Margin="-5,0,0,5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Label Content="Status:" FontWeight="Bold" />
+                    <Label Name="lblStatus" Content="Disconnected" Foreground="Red" />
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+        <Grid>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Current Application:" FontWeight="Bold" Width="130" />
+                    <Label Name="lblApplicationName" Content="[Please connect and select an application. Configure connection in File -> Settings]" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Available Features:" FontWeight="Bold" Width="130" />
+                    <Image Name="imgMembership" Source="Images/ok.png" />
+                    <Label Content="Membership" Margin="0,0,15,0" />
+                    <Image Name="imgRole" Source="Images/ok.png" />
+                    <Label Content="Role Manager" Margin="0,0,15,0" />
+                    <Image Name="imgProfile" Source="Images/ok.png" />
+                    <Label Content="Profile" Margin="0,0,15,0" />
+                    <Image Name="imgWebParts" Source="Images/ok.png" />
+                    <Label Content="Web Parts Personalization" Margin="0,0,15,0" />
+                    <Image Name="imgWebEvents" Source="Images/ok.png" />
+                    <Label Content="Web Events" />
+                </StackPanel>
+                <Separator />
+                <StackPanel Orientation="Horizontal" Height="570">
+                    <TreeView Width="200" BorderThickness="0,0,1,0">
+                        <TreeViewItem Name="tviRoles">
+                            <TreeViewItem.Header>
+                                <Border Width="170" BorderBrush="LightGray" 
+		                            Background="LightGray"  BorderThickness="1" 
+		                            CornerRadius="3" Margin="2" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Roles" FontWeight="Bold" />
+                                    </StackPanel>
+                                </Border>
+                            </TreeViewItem.Header>
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Add new role" Name="miAddNewRole" Click="miAddNewRole_Click" IsEnabled="False">
+                                        <MenuItem.Icon>
+                                            <Image Source="Images/group_add.png" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                        </TreeViewItem>
+                        <TreeViewItem Name="tviUsers">
+                            <TreeViewItem.Header>
+                                <Border Width="170" BorderBrush="LightGray" 
+		                            Background="LightGray"  BorderThickness="1" 
+		                            CornerRadius="3" Margin="2" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Users" FontWeight="Bold" />
+                                    </StackPanel>
+                                </Border>
+                            </TreeViewItem.Header>
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Add new user" Name="miAddNewUser" Click="miAddNewUser_Click"  IsEnabled="False">
+                                        <MenuItem.Icon>
+                                            <Image Source="Images/user_add.png" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                        </TreeViewItem>
+                        <TreeView.Resources>
+                            <SolidColorBrush Color="Transparent" x:Key="{x:Static SystemColors.HighlightBrushKey}" />
+                        </TreeView.Resources>
+                    </TreeView>
+                    <StackPanel Orientation="Vertical" Name="spDetails" Width="565" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

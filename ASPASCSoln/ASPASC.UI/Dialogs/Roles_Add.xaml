@@ -1,0 +1,14 @@
+﻿<Window x:Class="ASPASC.UI.Dialogs.Roles_Add"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add new Role" Height="100" Width="300" Icon="/ASPASC.UI;component/Images/ASPASC.png" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Role Name:"/>
+                <TextBox Name="tbRoleName" Width="200" />
+            </StackPanel>
+            <Button HorizontalAlignment="Center" Name="btnAdd" Content="Add" Width="100" Click="btnAdd_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
