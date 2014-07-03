@@ -76,19 +76,37 @@ namespace ASPASC.MembershipProvider
 
     public static class Encryption
     {
+        /// <summary>
+        /// Encryps the data with the given key
+        /// </summary>
+        /// <param name="input">String to encyprt</param>
+        /// <param name="key">Encryption key</param>
+        /// <returns>Encrypted String</returns>
         public static string Encrypt(string input, string key)
         {
             try
             {
-                byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
-                TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
-                tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
-                tripleDES.Mode = CipherMode.ECB;
-                tripleDES.Padding = PaddingMode.PKCS7;
-                ICryptoTransform cTransform = tripleDES.CreateEncryptor();
-                byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
-                tripleDES.Clear();
-                return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+                // Create a new 3DES provider
+                using (TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider())
+                {
+                    // Get the input as binary
+                    byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
+
+                    // Assign the key
+                    tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+                    // Work in ECB mode
+                    tripleDES.Mode = CipherMode.ECB;
+                    // Pad with PKCS7
+                    tripleDES.Padding = PaddingMode.PKCS7;
+
+                    // Create the encryptor
+                    ICryptoTransform cTransform = tripleDES.CreateEncryptor();
+
+                    // Encrypt
+                    byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+
+                    return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+                }
             }
             catch (Exception ex)
             {
@@ -101,15 +119,27 @@ namespace ASPASC.MembershipProvider
         {
             try
             {
-                byte[] inputArray = Convert.FromBase64String(input);
-                TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
-                tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
-                tripleDES.Mode = CipherMode.ECB;
-                tripleDES.Padding = PaddingMode.PKCS7;
-                ICryptoTransform cTransform = tripleDES.CreateDecryptor();
-                byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
-                tripleDES.Clear();
-                return UTF8Encoding.UTF8.GetString(resultArray);
+                // Create a new 3DES provider
+                using (TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider())
+                {
+                    // Get the input as binary
+                    byte[] inputArray = Convert.FromBase64String(input);
+
+                    // Assign the key
+                    tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+                    // Work in ECB mode
+                    tripleDES.Mode = CipherMode.ECB;
+                    // Pad with PKCS7
+                    tripleDES.Padding = PaddingMode.PKCS7;
+
+                    // Create the decryptor
+                    ICryptoTransform cTransform = tripleDES.CreateDecryptor();
+
+                    // Decrypt
+                    byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+                    
+                    return UTF8Encoding.UTF8.GetString(resultArray);
+                }
             }
             catch (Exception ex)
             {
@@ -123,6 +153,9 @@ namespace ASPASC.MembershipProvider
     {
         #region "Properties"
 
+        /// <summary>
+        /// Create the DataLayer property to always initialize properly
+        /// </summary>
         private DL _DL
         {
             get
@@ -138,6 +171,9 @@ namespace ASPASC.MembershipProvider
             }
         }
 
+        /// <summary>
+        /// Get the Membership.RequiresQuestionAndAnswer property
+        /// </summary>
         public Boolean PasswordQuestionAndAnswerEnabled
         {
             get
@@ -148,13 +184,20 @@ namespace ASPASC.MembershipProvider
 
         #endregion
 
+        /// <summary>
+        /// Construct the provider for the given application name
+        /// </summary>
+        /// <param name="applicationName">The application name</param>
         public ASPACMembProvider(String applicationName)
         {
+            // If a name was given and if it does not start with '['. The latter means no connection has been made to the database yet.
             if (applicationName.Length > 0 && !applicationName.StartsWith("["))
             {
+                // Check if the database has Membership enabled
                 if (membershipEnabled())
                     Membership.ApplicationName = applicationName;
 
+                // Check if the database has Roles enabled
                 if (rolesEnabled())
                     Roles.ApplicationName = applicationName;
             }
