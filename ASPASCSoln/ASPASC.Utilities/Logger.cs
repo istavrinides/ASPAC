@@ -12,7 +12,10 @@ namespace ASPASC.Utilities
     {
         public static void LogError(Exception ex, String codeLocation)
         {
-            String logFile = String.Format(@"{0}\LOGS\{1}", Path.GetDirectoryName(Application.ExecutablePath), DateTime.Now.ToString("yyyyMMdd"));
+            if (!Directory.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\LOGS"))
+                Directory.CreateDirectory(Path.GetDirectoryName(Application.ExecutablePath) + @"\LOGS");
+
+            String logFile = String.Format(@"{0}\LOGS\{1}.log", Path.GetDirectoryName(Application.ExecutablePath), DateTime.Now.ToString("yyyyMMdd"));
 
             using (StreamWriter sw = new StreamWriter(logFile, true))
             {
@@ -23,6 +26,8 @@ namespace ASPASC.Utilities
                 entry.AppendFormat("{0}", ex.Message);
 
                 sw.WriteLine(entry);
+
+                sw.WriteLine(ex.StackTrace);
             }
         }
     }

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ASPASC.MembershipProvider;
 using ASPASC.Model;
 using ASPASC.BusinessLayer;
+using ASPASC.Utilities;
 using System.Text.RegularExpressions;
 
 namespace ASPASC.UI
@@ -1203,11 +1204,18 @@ namespace ASPASC.UI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            generateApplicationMenuItem(true);
+            try
+            {
+                generateApplicationMenuItem(true);
 
-            showConnectionInformation(configurationChange:false);
+                showConnectionInformation(configurationChange: false);
 
-            findEnabledFeatures();
+                findEnabledFeatures();
+            }
+            catch (Exception ex)
+            {
+                TextLogger.LogError(ex, "UI.MainWindow.Loaded");
+            }
         }
 
         #endregion

@@ -232,6 +232,10 @@
       <Project>{bf6e955d-7c23-444a-b848-fa8f8091d583}</Project>
       <Name>ASPASC.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ASPASC.Utilities\ASPASC.Utilities.csproj">
+      <Project>{d65d975c-136f-49c4-83b0-040aef3d992f}</Project>
+      <Name>ASPASC.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\connect.png" />

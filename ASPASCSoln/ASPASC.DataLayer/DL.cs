@@ -188,7 +188,19 @@ namespace ASPASC.DataLayer
                                      Name = p.ApplicationName
                                  };
 
-                    return retVal.ToList();
+                    List<ASPASCApplication> apps = retVal.ToList();
+                    
+                    // No applications, not even the default one. We need to create it on first 
+                    if (apps.Count == 0)
+                    {
+                        Guid? newAppId = Guid.Empty;
+
+                        _dc.aspnet_Applications_CreateApplication("/", ref newAppId);
+
+                        apps.Add(new ASPASCApplication() { Description = "", Id = newAppId.GetValueOrDefault(), Name = "/" });
+                    }
+
+                    return apps;
                 }
                 catch (Exception ex)
                 {
